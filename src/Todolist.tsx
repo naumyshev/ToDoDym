@@ -15,7 +15,6 @@ type PropsType = {
 }
 
 export const Todolist = (props: PropsType) => {
-
     return (
         <div>
             <h3>{props.title}</h3>
