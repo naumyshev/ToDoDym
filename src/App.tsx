@@ -19,16 +19,22 @@ function App() {
         setTasks(filteredTasks)
     }
 
+    const addTask = (title: string) => {
+        const newTask = {id: v1(), title: title, isDone: false}
+        const newTasks = [newTask, ...tasks]
+        setTasks(newTasks)
+    }
+
     const changeFilter = (value: FilterValuesType) => {
         setFilter(value)
     }
 
     let tasksForTodolist = tasks
     if (filter === 'completed') {
-        tasksForTodolist = tasks.filter( t => t.isDone)
+        tasksForTodolist = tasks.filter(t => t.isDone)
     }
     if (filter === 'active') {
-        tasksForTodolist = tasks.filter( t => !t.isDone)
+        tasksForTodolist = tasks.filter(t => !t.isDone)
     }
 
     return (
@@ -38,6 +44,7 @@ function App() {
                 tasks={tasksForTodolist}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
         </div>
     );
