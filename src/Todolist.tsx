@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValuesType} from "./App";
 
+
 export type TaskType = {
     id: string
     title: string
@@ -19,18 +20,25 @@ type PropsType = {
 export const Todolist = (props: PropsType) => {
 
     const [newTaskTitle, setNewTaskTitle] = useState("")
+     const [error, setError] = useState<string | null>(null)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (e.key === "Enter") {
             addTask()
         }
     }
     const addTask = () => {
-        props.addTask(newTaskTitle)
-        setNewTaskTitle("")
+
+        if (newTaskTitle.trim() !== "") {
+            props.addTask(newTaskTitle.trim())
+            setNewTaskTitle("")
+        } else {
+            setError("Field is required")
+        }
     }
     const changeFilterHandler = (value: FilterValuesType) => props.changeFilter(value)
 
@@ -44,8 +52,10 @@ export const Todolist = (props: PropsType) => {
                     value={newTaskTitle}
                     onChange={onChangeHandler}
                     onKeyPress={onKeyPressHandler}
+                    className={error ?'error' : ''}
                 />
                 <button onClick={addTask}>+</button>
+                {error && <div className={'error-message'}>Field is required</div>}
             </div>
             <ul>
                 {
