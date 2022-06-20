@@ -78,6 +78,11 @@ function App() {
     return (
         <div className="App">
 
+            <div>
+                <h3>Add Todolist</h3>
+                <input type="text"/>
+                <button>+</button>
+            </div>
             {
                 todolists.map((tl) => {
 
