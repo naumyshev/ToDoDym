@@ -57,6 +57,15 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             }
             return sateCopy
         }
+        case 'CHANGE-TITLE-STATUS': {
+            const sateCopy = {...state}
+            const tasks = sateCopy[action.todolistId]
+            const task = tasks.find(t => t.id === action.taskId)
+            if (task) {
+                task.title = action.title
+            }
+            return sateCopy
+        }
         default:
             return state
     }
