@@ -23,6 +23,7 @@ function App() {
         {id: todolistID_1, title: "What to learn", filter: 'all'},
         {id: todolistID_2, title: "What to buy", filter: 'all'}
     ])
+
     const [tasks, setTasks] = useState<TasksStateType>({
         [todolistID_1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},

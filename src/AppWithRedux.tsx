@@ -3,8 +3,6 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
-import {userReducer} from "./state/user-reducer";
-
 import {
     addTodolistAC,
     changeTodolistFilterAC,
@@ -24,7 +22,7 @@ export type TasksStateType = {
     [todolistID: string]: Array<TaskType>
 }
 
-function AppWithReducers() {
+function AppWithRedux() {
 
     const todolistID_1 = v1()
     const todolistID_2 = v1()
@@ -52,16 +50,13 @@ function AppWithReducers() {
     })
 
     const removeTodolist =(todolistId: string) => {
-
         dispatchToTodolistsReducer(removeTodolistAC(todolistId))
         dispatchToTasksReducer(removeTodolistAC(todolistId))
-
     }
     const changeTodolistTitle = (id: string, newTitle: string) => {
         dispatchToTodolistsReducer(changeTodolistTitleAC(id, newTitle))
     }
     const addTodolist = (title: string) => {
-
         dispatchToTodolistsReducer(addTodolistAC(title))
         dispatchToTasksReducer(addTodolistAC(title))
     }
@@ -86,8 +81,6 @@ function AppWithReducers() {
     const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
         const action = changeTaskTitleAC(taskId, newTitle, todolistId)
         dispatchToTasksReducer(action)
-
-        
     }
 
     return (
@@ -134,4 +127,4 @@ function AppWithReducers() {
     );
 }
 
-export default AppWithReducers;
+export default AppWithRedux;
