@@ -6,6 +6,7 @@ export type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
     taskId: string
     todolistId: string
+
 }
 
 export type AddTaskActionType = {
@@ -28,6 +29,7 @@ export type ChangeTaskTitleActionType = {
     todolistId: string
 }
 
+
 type ActionType = RemoveTaskActionType | AddTaskActionType |
     ChangeTaskStatusActionType | ChangeTaskTitleActionType |
     AddTodolistActionType | RemoveTodolistActionType
@@ -39,6 +41,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
             const tasks = stateCopy[action.todolistId]
             const filteredTasks = tasks.filter(t => t.id !== action.taskId)
             stateCopy[action.todolistId] = filteredTasks
+
             return stateCopy
         }
         case "ADD-TASK": {
@@ -47,6 +50,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
             const newTask = {id: v1(), title: action.title, isDone: false}
             const newTasks = [newTask, ...tasks]
             stateCopy[action.todolistId] = newTasks
+
             return stateCopy
         }
         case "CHANGE-TASK-STATUS": {
@@ -70,11 +74,14 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
         case "ADD-TODOLIST": {
             const stateCopy = {...state}
             stateCopy[action.todolistId] = []
+
             return stateCopy
         }
         case "REMOVE-TODOLIST": {
             const stateCopy = {...state}
+
             delete stateCopy[action.todolistId]
+
             return stateCopy
         }
         default:
@@ -83,6 +90,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
 }
 
 export const removeTaskAC = (taskId: string, todolistId: string): RemoveTaskActionType => {
+
     return {type: 'REMOVE-TASK', taskId: taskId, todolistId: todolistId}
 }
 
@@ -101,3 +109,4 @@ export const changeTaskTitleAC = (taskId: string,
                                   todolistId: string): ChangeTaskTitleActionType => {
     return {type: 'CHANGE-TASK-TITLE', taskId: taskId, title: title, todolistId: todolistId}
 }
+

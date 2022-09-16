@@ -3,6 +3,8 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
+import {userReducer} from "./state/user-reducer";
+
 import {
     addTodolistAC,
     changeTodolistFilterAC,
@@ -50,13 +52,16 @@ function AppWithReducers() {
     })
 
     const removeTodolist =(todolistId: string) => {
+
         dispatchToTodolistsReducer(removeTodolistAC(todolistId))
         dispatchToTasksReducer(removeTodolistAC(todolistId))
+
     }
     const changeTodolistTitle = (id: string, newTitle: string) => {
         dispatchToTodolistsReducer(changeTodolistTitleAC(id, newTitle))
     }
     const addTodolist = (title: string) => {
+
         dispatchToTodolistsReducer(addTodolistAC(title))
         dispatchToTasksReducer(addTodolistAC(title))
     }
@@ -81,6 +86,8 @@ function AppWithReducers() {
     const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
         const action = changeTaskTitleAC(taskId, newTitle, todolistId)
         dispatchToTasksReducer(action)
+
+        
     }
 
     return (
