@@ -13,7 +13,9 @@ export const AddItemForm = (props: AddItemFormType) => {
         setNewTaskTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if (error !== null) {
+            setError(null)
+        }
         if (e.key === "Enter") {
             addTask()
         }
