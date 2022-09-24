@@ -4,7 +4,7 @@ type AddItemFormType = {
     addItem: (title: string) => void
 }
 
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = React.memo((props: AddItemFormType) => {
 
     const [newTaskTitle, setNewTaskTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
@@ -43,4 +43,4 @@ export const AddItemForm = (props: AddItemFormType) => {
             {error && <div className={'error-message'}>Field is required</div>}
         </div>
     )
-}
+})

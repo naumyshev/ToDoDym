@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
@@ -35,9 +35,9 @@ function AppWithRedux() {
     const changeTodolistTitle = (id: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(id, newTitle))
     }
-    const addTodolist = (title: string) => {
+    const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    }
+    }, [])
     const changeFilter = (value: FilterValuesType, todolistId: string) => {
         dispatch(changeTodolistFilterAC(todolistId, value))
     }
